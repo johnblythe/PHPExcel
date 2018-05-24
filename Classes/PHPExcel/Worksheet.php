@@ -2426,7 +2426,7 @@ class PHPExcel_Worksheet implements PHPExcel_IComparable
                                 } else if ($cellValue[1] == 'numeric') {
                                     $this->getStyle($currentColumn . $startRow)
                                         ->getNumberFormat()
-                                        ->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER_COMMA_SEPARATED1);
+                                        ->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
                                 }
                                 $this->getCell($currentColumn . $startRow)->setValue($cellValue[0]);
 
