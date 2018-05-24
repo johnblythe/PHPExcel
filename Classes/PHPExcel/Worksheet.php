@@ -2412,7 +2412,26 @@ class PHPExcel_Worksheet implements PHPExcel_IComparable
                             $this->getCell($currentColumn . $startRow)->setValue($cellValue);
                         }
                     } else {
-                        if ($cellValue != $nullValue) {
+                        if (is_array($cellValue) && count($cellValue)>0) {
+                            if ($cellValue[0] != $nullValue) {
+                                // Set cell value
+                                if ($cellValue[1] == 'string') {
+                                    $this->getStyle($currentColumn . $startRow)
+                                        ->getNumberFormat()
+                                        ->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_TEXT);
+                                } else if ($cellValue[1] == 'currency') {
+                                    $this->getStyle($currentColumn . $startRow)
+                                        ->getNumberFormat()
+                                        ->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_CURRENCY_USD);
+                                } else if ($cellValue[1] == 'numeric') {
+                                    $this->getStyle($currentColumn . $startRow)
+                                        ->getNumberFormat()
+                                        ->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER_COMMA_SEPARATED1);
+                                }
+                                $this->getCell($currentColumn . $startRow)->setValue($cellValue[0]);
+
+                            }
+                        } else if ($cellValue != $nullValue) {
                             // Set cell value
                             $this->getCell($currentColumn . $startRow)->setValue($cellValue);
                         }
