@@ -2427,6 +2427,10 @@ class PHPExcel_Worksheet implements PHPExcel_IComparable
                                     $this->getStyle($currentColumn . $startRow)
                                         ->getNumberFormat()
                                         ->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
+                                } else if ($cellValue[1] == 'float') {
+                                    $this->getStyle($currentColumn . $startRow)
+                                        ->getNumberFormat()
+                                        ->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER_COMMA_SEPARATED1);
                                 }
                                 $this->getCell($currentColumn . $startRow)->setValue($cellValue[0]);
 
