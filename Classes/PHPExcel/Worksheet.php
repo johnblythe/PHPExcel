@@ -2422,7 +2422,7 @@ class PHPExcel_Worksheet implements PHPExcel_IComparable
                                 } else if ($cellValue[1] == 'currency') {
                                     $this->getStyle($currentColumn . $startRow)
                                         ->getNumberFormat()
-                                        ->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_CURRENCY_USD);
+                                        ->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_CURRENCY_USD_SIMPLE);
                                 } else if ($cellValue[1] == 'numeric') {
                                     $this->getStyle($currentColumn . $startRow)
                                         ->getNumberFormat()
