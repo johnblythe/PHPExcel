@@ -2415,11 +2415,7 @@ class PHPExcel_Worksheet implements PHPExcel_IComparable
                         if (is_array($cellValue) && count($cellValue)>0) {
                             if ($cellValue[0] != $nullValue) {
                                 // Set cell value
-                                if ($cellValue[1] == 'string') {
-                                    $this->getStyle($currentColumn . $startRow)
-                                        ->getNumberFormat()
-                                        ->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_TEXT);
-                                } else if ($cellValue[1] == 'currency') {
+                                if ($cellValue[1] == 'currency') {
                                     $this->getStyle($currentColumn . $startRow)
                                         ->getNumberFormat()
                                         ->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_CURRENCY_USD_SIMPLE);
@@ -2427,12 +2423,18 @@ class PHPExcel_Worksheet implements PHPExcel_IComparable
                                     $this->getStyle($currentColumn . $startRow)
                                         ->getNumberFormat()
                                         ->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER);
-                                } else if ($cellValue[1] == 'float') {
+                                }
+                                else if ($cellValue[1] == 'float') {
                                     $this->getStyle($currentColumn . $startRow)
                                         ->getNumberFormat()
                                         ->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER_COMMA_SEPARATED1);
                                 }
-                                $this->getCell($currentColumn . $startRow)->setValue($cellValue[0]);
+                                if ($cellValue[1] == 'string') {
+                                    $this->getCell($currentColumn . $startRow)
+                                        ->setValueExplicit($cellValue[0], PHPExcel_Cell_DataType::TYPE_STRING);
+                                } else {
+                                    $this->getCell($currentColumn . $startRow)->setValue($cellValue[0]);
+                                }
 
                             }
                         } else if ($cellValue != $nullValue) {
